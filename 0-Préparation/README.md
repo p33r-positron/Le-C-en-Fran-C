@@ -50,7 +50,9 @@ Si pareil il n'y a pas de texte "No input file" ou "Aucun fichier d'entrée"...
   
 ### GNU/Linux et BSD  
   
-GCC est fourni de base, si vous utilisez Alpine Linux, entrez la commande "apk add build-base" (Sans guillemets) dans un Terminal.  
+GCC est fourni de base sur les distros GNU/Linux\*
+Les Free/Open/Net BSD devraient avoir clang de base ou GCC
+*\*Si vous utilisez Alpine Linux, entrez la commande "apk add build-base" (Sans guillemets) dans un Terminal.*  
   
 ## Dernières choses  
   
