@@ -30,7 +30,10 @@ qui
 s'étend
 sur plusieurs lignes :)
 
-Youpi !*/```
+Youpi !*/
+```  
 
-Pour une seule ligne commentée c'est deux slashs au début de celle-ci
-Pour un paragraphe de commentaire c'est slash suivi d'un astérique au début et l'inverse à la fin
+Pour une seule ligne commentée c'est deux slashs au début de celle-ci  
+Pour un paragraphe de commentaire c'est slash suivi d'un astérique au début et l'inverse à la fin  
+
+coming soune
