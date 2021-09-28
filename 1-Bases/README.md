@@ -42,7 +42,7 @@ Pour un paragraphe de commentaire c'est slash suivi d'un astérique au début et
 
 Une variable en C c'est comme une variable mathématique.  
 Sauf que le C est virtuel, donc les variables habitent dans le grand pays qu'est vos barettes de RAM...  
-![](assets/ram.pmg)  
+![](assets/ram.png)  
 Donc votre barette de RAM va laisser un petit logement pour votre variable !  
 Une variable au fond, c'est un nombre, vu que les seules variables en C sont:  
 -Un nombre entier  
