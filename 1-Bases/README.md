@@ -301,7 +301,7 @@ Voilà la syntaxe de création de pointeur:
 ![](assets/pointeur.png)  
 Pour faire simple:  
   
--`type* nom = NULL;` et `type* nom = 0;` c'est un pointeur vide
+-`type* nom = NULL;` et `type* nom = 0;` c'est un pointeur vide  
 -`type* nom = &variable;` c'est un pointeur qui pointe vers *variable*/contient l'adresse mémoire de *variable*  
 -`type* nom = pointeurQuiPointe;` c'est un clone du pointeur *pointeurQuiPointe*  
 -`type* nom = 0x3491;` (Remplacez 0x3491 par une adresse mémoire) c'est un pointeur qui pointe vers 0x391 dans ce cas là  
