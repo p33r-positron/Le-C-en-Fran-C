@@ -309,7 +309,7 @@ Pour faire simple:
 ##### Déréférencer un pointeur
 
 Pour accèder au contenu d'un pointeur, on le "déréférence"  
-En français: On va sonner chez la maison à l'adresse qu'il y avait que contenait le papier sur la porte  
+En français: On va sonner chez la maison à l'adresse que contenait le papier sur la porte  
 On fait comme ça:  
 ```c
 int* ptr = 0; //Pointeur qui pointe vers rien
