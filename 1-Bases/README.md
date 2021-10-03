@@ -49,7 +49,7 @@ Une variable au fond, c'est un nombre, vu que les seules variables en C sont:
 -Un nombre entier  
 -Un nombre à virgule  
 -Un nombre à virgule très long  
--Un caractère (Qui correspond à un nombre dans la table ASCII/UTF-8/etc)  
+-Un caractère (Qui correspond à un nombre dans la table ASCII)  
 -Rien du tout  
   
 Et si cette variable n'est pas une constante (On verra ce que c'est plus tard), on peut la modifier !  
@@ -60,7 +60,7 @@ Techniquement on à seulement:
 int (Pour *integer* -> (nombre) entier en français): Nombre entier  
 float (Nombre à virgule *flottante*): Nombre à virgule  
 double (*Double* de précision qu'un float): Nombre qui peut avoir le *double* de nombre après la virgule que float  
-char (*character*->caractère en français): Nombre qui correspond à un caractère dans la table utilisée (ASCII par exemple)  
+char (*character*->caractère en français): Nombre qui correspond à un caractère dans la table utilisée (ASCII normalement)  
 void (void->vide en français): Rien. Rien du tout.  
 *N'est pas sensé exister* \_Bool (*Booléen*): Signifie vrai ou faux pour les conditions, très récent, préferer 1 et 0 à vrai et faux est mieux.
   
@@ -72,6 +72,7 @@ Voilà quelques "adjectifs de variables":
 -signed: On coupe le nombre de possibilités en deux, la première moitié c'est les nombres négatifs jusqu'à (-1) inclus, l'autre de 0 à *max*  
 -unsigned: Seulement des nombres positifs (Unsigned -> Sans signe -> Sans symbole -> Pas de "-")  
 -volatile: Empêcher le compilateur de "l'optimiser" (Vous ne l'utiliserez sans doute jamais)  
+-const: La variable ne pourra plus jamais être modifié, c'est une constante, on dit qu'elle est "Seulement accessible en lecture"  
 
 De plus, grâce au "structures", on aura des nouveaux types de variables, mais c'est pour plus tard !  
   
@@ -94,7 +95,7 @@ char voyelle1 = 'A'; //AEIOU... I
 char voyelle1m = 'a'; //aeiou... grec
 long long int unMilliard = 1000000000; //Milles millions de milles sabords !
 long double float presquePI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062; //Et Pi' on arrivera jamais au bout de toutes façons...
-double float presqueUnTiers = 1.3333333333333333333; //Beau cheval !
+double float presqueUnTiers = 0.3333333333333333333; //Beau cheval !
 float troisDemis = 1.5; //Un peu de "pain-demi" ?
 int quatreVingtDix = 90; //Nonante ?
 ```
