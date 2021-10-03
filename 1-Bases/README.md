@@ -218,7 +218,7 @@ int majorité = ages[0]; //On prends le 0ème élément de ages, donc 18
 On peut aussi modifier des éléments:  
 ```c
 int ages[10] = {18, 63, 23, 34, 31, 349, 72, 2, (-1), 0};
-ages[0] = 6; Maintenant, ages = {6, 63, 23, 34, 31, 349, 72, 2, (-1), 0};
+ages[0] = 6; //Maintenant, ages = {6, 63, 23, 34, 31, 349, 72, 2, (-1), 0};
 ```
 
 ###### Connaître la taille d'un Tableau
