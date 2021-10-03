@@ -235,8 +235,8 @@ Je pense que certains qui ont vu les types de variables au début se sont dit:
 "MISÉRICORDE ! IL N'Y A PAS DE *STRINGS* COMMENT VA-T-ON METTRE DU TEXTE DANS DES VARIABLES ?"  
 *\*String: "Chaîne de caractère" en anglais*  
 La réponse à ça: Les chaînes de caractères !  
-C'est simple: On fait un tableau de *char* !
-*A savoir: En C les gens appellent ça des **char\*** *  
+C'est simple: On fait un tableau de *char* !  
+*A savoir: En C les gens appellent ça des **char\* ** *  
 
 Donc voilà comment faire:
 ```c
