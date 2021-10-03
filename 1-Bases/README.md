@@ -236,7 +236,7 @@ Je pense que certains qui ont vu les types de variables au début se sont dit:
 *\*String: "Chaîne de caractère" en anglais*  
 La réponse à ça: Les chaînes de caractères !  
 C'est simple: On fait un tableau de *char* !  
-*A savoir: En C les gens appellent ça des **char\* ** *  
+*A savoir: En C les gens appellent ça des **char\****  
 
 Donc voilà comment faire:
 ```c
