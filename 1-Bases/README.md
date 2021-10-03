@@ -399,7 +399,7 @@ Beh ducoup, le compilateur et gentil et dit:
 "Beh si un tableau est un pointeur, déclare ce string comme un pointeur et je compterai la taille moi-même !"  
 Ou plutôt car en réalité il se passe ça:  
 ```c
-//char temporaire[6] = "texte"; //6 car longueur du texte + 1
+char temporaire[6] = "texte"; //6 car longueur du texte + 1
 char* mot = temporaire;
 //En réalité il n'y a pas de nouvelle variable crée, le compilateur se charge de tout optimiser :D
 ```
