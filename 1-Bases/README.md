@@ -532,7 +532,7 @@ b = a++; //b est réassigné à 2 (et non à 3)
 
 *"MER POURKOI b VAUT 2 ET PAS 3 ? TA DI KE INCREMENTATION C AJOUTER 1"*  
 Mon très cher Kévin, le **post** dans post-incrémentation ne compte pas pour du beurre:  
-Pré-incrémentation: "Je te donne sa valeur, et après j'ajoute 1 !"  
+Post-incrémentation: "Je te donne sa valeur, et après j'ajoute 1 !"  
 Dans cet ordre là, donc il rajoute 1 après l'utilisation !  
 
 ##### Pré-incrémentation
