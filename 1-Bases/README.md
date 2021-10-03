@@ -407,7 +407,7 @@ char* mot = temporaire;
 ### Les paramètres de précompilation
 
 Le compilateur est un gentil monsieur et on peut lui dire de faire des trucs pour nous avant de compiler notre programme :D  
-Exemple: Inclure un fichier  
+Exemple: Inclure un fichier, voir l'OS sur lequel on est...  
 `#include <bibliotheque.h>` pour les bibliothèques installés  
 `#include "fichier"` pour remplacer cette ligne par le contenu de *fichier* qui est dans le même dossier que votre code  
 `#include "fichier.h"` pour inclure la bibliothèque *fichier.h* que vous avez dans le même dossier que votre code  
@@ -425,7 +425,7 @@ Exemple: Inclure un fichier
 ```
 Dans l'ordre: "Si condition alors <code C Nº1>" "Si condition alors <code C Nº2> sinon <code C Nº3>"  
 *A savoir: On peut remplacer `#ifdef` par `#ifndef` pour faire "Si condition est faux"*  
-*A savoir bis: On peut mettre des `#elif autreCondition` pour faire "Si condition alors A, sinon: Si condition alors B..."*
+*A savoir bis: On peut mettre des `#elif autreCondition` pour faire "Si condition alors A, sinon: Si autreCondition alors B..."*
 
 Il y a d'autres paramètres de précompilation mais vous risquez pas de les utiliser maintenant  
 
