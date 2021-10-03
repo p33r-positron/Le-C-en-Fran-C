@@ -110,7 +110,7 @@ Pour réassigner une variable, on fait comme si on la déclarait mais sans mettr
 ```c
 int a = 349, b; //a vaut 349, b n'a pas de valeur
 
-b = 42; //b vaut désormais 12
+b = 42; //b vaut désormais 42
 a = 69; //a vaut désormais 69
 b = a; //b vaut désormais pareil que a, donc 69
 ```
