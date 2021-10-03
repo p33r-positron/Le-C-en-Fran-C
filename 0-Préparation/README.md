@@ -9,7 +9,7 @@ Parce-que un bout de code en C qui affiche "Coucou !" à l'écran, on prend sa s
 Donc le C était génial car il était disponible sur tout ordinateur et tout système d'exploitation !  
 Aujourd'hui le C est peu à peu oublié, alors que presque tous les logiciels qui font vivre  
 les langages de programmation de maintenant sont fait (directement ou indirectement) grâce à lui !  
-Ces jeunes d'aujourd'hui avec leur python !  
+*Ces jeunes d'aujourd'hui avec leur python !*  
 Mais je digresse, aujourd'hui le C à la particularité d'être extrêment rapide ! (Par rapport à python, ruby et compagnie)  
 Donc le C est un bon choix comme premier langage, surtout que la majorité des langages de programmations modernes  
 utilisent la syntaxe du C ("C-like syntax", en anglais), je peux citer C++, Java, PHP, JavaScript et d'autres...  
@@ -50,8 +50,8 @@ Si pareil il n'y a pas de texte "No input file" ou "Aucun fichier d'entrée"...
   
 ### GNU/Linux et BSD  
   
-GCC est fourni de base sur les distros GNU/Linux\*
-Les Free/Open/Net BSD devraient avoir clang de base ou GCC
+GCC est fourni de base sur les distros GNU/Linux\*  
+Les Free/Open/Net BSD devraient avoir clang de base ou GCC  
 *\*Si vous utilisez Alpine Linux, entrez la commande "apk add build-base" (Sans guillemets) dans un Terminal.*  
   
 ## Dernières choses  
