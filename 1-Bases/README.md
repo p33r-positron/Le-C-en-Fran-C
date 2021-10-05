@@ -560,6 +560,7 @@ b = a++ + a--; //b est réassigné à a++ + a--, donc 2 + 3 -> 5
 //A cet instant, a vaut 2 de nouveau
 int c = --a; //a vaut 1 et c vaut 1
 int d = ++a; //a vaut 2 et d vaut 2
+```
 
 ### Les fonctions
 
