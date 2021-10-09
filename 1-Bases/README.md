@@ -540,18 +540,18 @@ Dans cet ordre là, donc il rajoute 1 après l'utilisation !
 On fait les choses dans l'ordre inverse:  
 On ajoute 1, et après on donne la valeur !  
 
-#### Décrémentation
+##### Décrémentation
 
 C'est retirer 1 au lieu d'ajouter 1  
 
-#### Comment on marque tout ça ?
+##### Comment on marque tout ça ?
 
 a++ -> Post-incrémentation  
 ++a -> Pré-incrémentation  
 a-- -> Post-décrémentation  
 --a -> Pré-décrémentation  
 
-#### Test
+##### Test
 
 ```c
 int a = 2; //a vaut 2
@@ -561,6 +561,23 @@ b = a++ + a--; //b est réassigné à a++ + a--, donc 2 + 3 -> 5
 int c = --a; //a vaut 1 et c vaut 1
 int d = ++a; //a vaut 2 et d vaut 2
 ```
+
+#### Opérations Binaires
+
+Je vais pas m'attarder dessus, mais pour faire simple:  
+  
+1) On convertit les nombres en binaire/Base 2  
+2) On fait passer les nombres par des *portes logiques*\*  
+  
+\*Porte Logique: Opération binaire, voir sur google ou (ici)[] (Lien non existant pour l'instant)  
+
+Les opérations binaries disponibles:  
+  
+-`&`, AND binaire  
+-`|`, OR binaire  
+-`^`, XOR binaire
+-`~`, NOT binaire (Seulement une entrée)  
+-`<<` et `>>`, "shifts" à gauche/droite  
 
 ### Les fonctions
 
@@ -581,4 +598,49 @@ Donc en gros:
 -Si on met rien entre parenthèses, la fonction ne prend pas d'arguments  
 -Si on met des trucs entre parenthèses (Ex: `(int age, char voyelle)`, il faudra appeler la fonction avec  
 
-coming soon
+Exemples:  
+
+```c
+
+void fonctionA(int nombre)
+{
+  nombre = 12; //ATTENTION: Seul notre exemplaire de nombre sera modifié, pas l'originel !
+}
+
+void fonctionB(int* nombre)
+{
+  *nombre = 42; //On déréference nombre pour le modifier
+}
+
+int fonctionC(int nombre)
+{
+  return nombre*nombre; //On retourne nombre*nombre, ou nombre².
+}
+
+int fonctionD()
+{
+  return 20; //On retourne 20, et puis c'est tout.
+}
+```
+
+#### Appeler une fonction
+
+On fait `nomFonction(argument1, argument2...);`:  
+
+```c
+void fonctionB(int* nombre)
+{
+  *nombre = 42; //On déréference nombre pour le modifier
+}
+
+int fonctionDv2()
+{
+  return 349;
+}
+
+int a = fonctionDv2(); //a vaut 349
+
+fonctionB(&a); //On a donné l'addresse de a à fonctionB, qui a toqué chez lui pour le modifier...
+```
+
+coming soune
