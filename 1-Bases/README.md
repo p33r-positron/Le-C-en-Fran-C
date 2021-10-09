@@ -171,6 +171,8 @@ Et la réponse est oui...
 1,34 -> 134 x 10^(-2)  
 A -> 65 (ASCII)  
 
+## Mémoire
+
 ### Pointeurs et Tableaux
 
 C'est le moment que tout le monde déteste: Les pointeurs  
@@ -404,7 +406,7 @@ char* mot = temporaire;
 //En réalité il n'y a pas de nouvelle variable crée, le compilateur se charge de tout optimiser :D
 ```
 
-### Les paramètres de précompilation
+## Les paramètres de précompilation
 
 Le compilateur est un gentil monsieur et on peut lui dire de faire des trucs pour nous avant de compiler notre programme :D  
 Exemple: Inclure un fichier, voir l'OS sur lequel on est...  
@@ -493,9 +495,9 @@ typedef unsigned long long int grand
 grand nombre = 283928493829489;
 ``` 
 
-### Arithmètique et Opérations
+## Arithmètique et Opérations
 
-#### Basique
+### Basique
 
 Le début est simple:  
   
@@ -515,13 +517,13 @@ Ensuite il y a des raccourcis:
 `a = a / b;` -> `a /= b;`  
 `a = a % b;` -> `a %= b;`  
   
-#### Incrémentation
+### Incrémentation
 
 Incrémentation -> Ajouter 1  
 
 Ok je vais peut-être parler chinois pour certains:  
 
-##### Post-incrémentation
+#### Post-incrémentation
 
 Pour faire simple:  
 ```c
@@ -535,23 +537,23 @@ Mon très cher Kévin, le **post** dans post-incrémentation ne compte pas pour 
 Post-incrémentation: "Je te donne sa valeur, et après j'ajoute 1 !"  
 Dans cet ordre là, donc il rajoute 1 après l'utilisation !  
 
-##### Pré-incrémentation
+#### Pré-incrémentation
 
 On fait les choses dans l'ordre inverse:  
 On ajoute 1, et après on donne la valeur !  
 
-##### Décrémentation
+#### Décrémentation
 
 C'est retirer 1 au lieu d'ajouter 1  
 
-##### Comment on marque tout ça ?
+#### Comment on marque tout ça ?
 
 a++ -> Post-incrémentation  
 ++a -> Pré-incrémentation  
 a-- -> Post-décrémentation  
 --a -> Pré-décrémentation  
 
-##### Test
+#### Test
 
 ```c
 int a = 2; //a vaut 2
@@ -562,7 +564,7 @@ int c = --a; //a vaut 1 et c vaut 1
 int d = ++a; //a vaut 2 et d vaut 2
 ```
 
-#### Opérations Binaires
+### Opérations Binaires
 
 Je vais pas m'attarder dessus, mais pour faire simple:  
   
@@ -579,16 +581,142 @@ Les opérations binaries disponibles:
 -`~`, NOT binaire (Seulement une entrée)  
 -`<<` et `>>`, "shifts" à gauche/droite  
 
-### Les fonctions
+## Conditions et Boucles
+
+On va finalement parler de `if`, `else`, `else if`, `switch`, `for` et `while` !  
+
+### Conditions
+
+#### Valeurs Booléennes
+
+##### \_Bool
+
+Depuis de récentes versions du C (>=C99) il existe le type \_Bool, c'est une valeur Booléene: Vrai ou Faux.  
+C'est un type comme les autres:  
+```c
+_Bool vrai1 = 1; //Vrai
+_Bool vrai2 = true; //Vrai
+_Bool faux1 = 0; //Faux
+_Bool faux2 = false; //Faux
+```
+Mais il sert aussi à garder le résultat d'une condition, on verra ça plus tard, mais...  
+On s'en fiche de \_Bool, on utilise `0` pour faux et les autres nombres pour vrai (Mêmes négatifs) !  
+
+##### Int
+
+0 c'est faux, le reste c'est vrai, aurevoir.  
+
+#### If
+
+If veut dire "Si" en Anglais  
+C'est un "Bloc", comme une fonction par exemple, qui analyse si la condition entre ses parenthèses est vraie, et si oui...  
+Il fait exécute du code. Voilà.  
+Exemple tout bête:  
+```c
+int a = 1; //a est 'Vrai', car il n'est pas 0
+
+if(a) //Si a est 'Vrai'...
+{
+  a = 12; //...réassigner sa valeur à 12
+}
+```
+
+Sachez que si, comme dans cet example, vous n'avez qu'une seule 'action' à faire, vous pouvez vous passez des accolades:  
+```c
+int a = 1;
+
+if(a) //Si a est 'Vrai'...
+  a = 13; //...il sera réassigné à 13.
+  a++; //On croit que a sera incrémenté que si a est vrai, et bien non ! Seul la première 'action' est conditionnée !
+```
+
+#### Else
+
+Else -> Sinon en anglais  
+Parfois, les conditions sont fausses, et on aimerait faire autre chose:  
+```
+int a = 0; //a est 'faux'
+
+if(a) //Si a est 'vrai' (Ce n'est pas le cas), l'action ci-dessous sera exécutée.
+  trouverLeRemedeContreLeCancer(); //Une prochaine fois peut-être...
+else //Autrement...
+{
+  a = 349; //...a est ré-assigné à 349
+}
+
+#### Petite pause de conditionnement
+
+Avant de continuer, on peut faire des condition qui dépendent de trucs.  
+Grâce à des opérateurs, les voilà:  
+
+`a == b` La condition est vraie si a et b on la même valeur.  
+`a < b` La condition est vraie si a est **strictement** (Donc non égal) inférieur à b.  
+`a > b` La condition est vraie si a est **strictement** (Donc non égal) supérieur à b.  
+`a <= b` La condition est vraie si a est inférieur ou égal à b.  
+`a >= b` La condition est vraie si a est supérieur ou égal à b. 
+`a != b` La condition est vraie si a est différent (non-égal) de b.  
+`!a` La condition est vraie si a est faux.  
+`condition1 && condition2` La condition est vraie si condition1 est vraie et condition2 est vraie.  
+`condition1 || condition2` La condition est vraie si entre condition1 et condition2 une des deux (**MINIMUM**) est vraie.  
+
+C'est tout il me semble.  
+Continuons.  
+
+#### Else if
+
+On a vu Si, on a vu Sinon, voilà leur enfant: Si Sinon !  
+On teste plusieurs conditions indépendamment:  
+
+```c
+int a = 12;
+int b = 20;
+int c = 12;
+int d = 0;
+
+if(a == b)
+{
+  d = 1;
+}
+else if(a > b)
+{
+  d = 2;
+}
+else //Ça marche aussi comme ça:
+{
+  if(a < b)
+  {
+    d = 3;
+  }
+  else if(a == c)
+    d = 4;
+  else if(b == c)
+    d = 5;
+  else
+  {
+    d = 6;
+  }
+}
+```
+
+Pour faire simple on fait Si(x){a} Sinon{ Si(y){b} Sinon{c} }  
+On met un Si dans un Sinon en somme.  
+
+#### Switch
+
+Celui là, c'est *un cas* ! Vous l'avez ? Ah oui je vous ai pas encore appris... Oups...  
+En gros switch ça veut dire intérrupteur en anglais, et ça à (un peu) de sens.  
+**\[COMING SOON\]**
+
+## Les fonctions
 
 Enfin, on va (bientôt) pouvoir commencer à compiler du code !  
 
-#### C'est quoi une fonction ?
+### C'est quoi une fonction ?
 
 Telle une fonction mathématique, une fonction informatique prend (ou non) des argumenst et renvoie une valeur.  
 Exemple: f(x) = x\*x  
 
-#### Déclarer une fonction
+### Déclarer une fonction
 
 Syntaxe de déclaration de fonction en C:  
 ![](assets/fonction.png)  
@@ -623,7 +751,7 @@ int fonctionD()
 }
 ```
 
-#### Appeler une fonction
+### Appeler une fonction
 
 On fait `nomFonction(argument1, argument2...);`:  
 
@@ -643,4 +771,73 @@ int a = fonctionDv2(); //a vaut 349
 fonctionB(&a); //On a donné l'addresse de a à fonctionB, qui a toqué chez lui pour le modifier...
 ```
 
-coming soune
+## Main
+
+### Une vérité à avouer
+
+Alors, il faut que vous le sachiez avant de pouvoir continuer:  
+  
+**La plupart de votre code se trouvera dans la fonction main()**  
+  
+Voilà maintenant vous le savez.  
+*Attention: Les **#includes** sont sensé se trouver en haut en dehors de main() et pareil pour vos propres fonctions !*  
+  
+Donc voilà votre premier programme ! Appelez le `main.c` (Car c'est le fichier principal -> main)  
+
+```c
+int main(int argc, char** argv)
+{
+  return 0;
+}
+```
+
+Compilez !  
+
+En fonction du compilateur:  
+`gcc main.c -o main && main`  
+`clang main.c -o main && main`  
+`tcc main.c -o main && main`  
+*Rajoutez un .exe au premier main pour Windows*  
+
+### C'est quoi tout ça ?
+
+#### Pourquoi int et return ?
+
+Alors votre programme est une fonction de type int oui.  
+Pour la simple raison qu'il va retourner un code d'erreur, ici c'est zéro (Ça veut dire: "Pas d'erreur")  
+Il y a aussi 1 (Une erreur) et d'autres trucs, l'important c'est que zéro c'est pas d'erreur et le reste oui !  
+
+#### Pourquoi les arguments dans la fonction ?
+
+Vous avez sûrement remarqué le `int argc, char** argv`  
+Pour faire simple, c'est les arguments de ligne de commande.  
+Quand vous exécutez un programme en ligne de commande vous pouvez faire comme ça:  
+`./programme` ou `programme.exe`  
+Mais aussi comme-celà:  
+`./programme -a b argument1` ou `programme.exe -a b argument1`  
+Par exemple pour la compilation, vous spécifiez les arguments `main.c -o main`  
+C'est pour dire au compilateur: "Le code est dans main.c, mais l'exécutable de fin doit s'appeler main(.exe) !"  
+*A savoir: le `&& main` sert juste à dire "Si la commande d'avant à réussi, faire celle d'après !" (&&)*  
+  
+Bref, pour faire simple, il y aura toujours au moins 1 argument (et donc le premier): Le nom de votre programme  
+Donc si vous faîtes `./programme` ou `programme.exe`:  
+int argc vaudra 1, et char\*\* argv sera un tableau de char\*/strings et le premier sera `./programme` ou `programme.exe`.  
+Mais si on fait, par exemple: `./programme A` ou `programme.exe A`:  
+int argc vaudra 2, et char\*\* argv contiendra `./programme`/`programme.exe` et `A` en temps que char\* et non pas char.  
+Donc on peut faire un truc comme ça:  
+
+```c
+int main(int argc, char** argv)
+{
+  if(argc >= 2) //Si il y a au moins 2 arguments en comptant le nom du programme...
+  {
+    char* argument1 = argv[1]
+    if(argument1[0] == 'A') //Si le premier caractère de argument1 est un A...
+      return 0; //Pas d'erreur
+    else
+      return 1; //Erreur !
+  }
+  else //Sinon..
+    return 1; //Erreur !
+}
+```
