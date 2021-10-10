@@ -754,7 +754,7 @@ Traductions:
 `break;` -> Dis au switch que c'est fini, dans le cas contraire on continue de rechercher dans le switch un `case u:` ou u équivaut x, ou un `default:`.  
 *//Vérité à savoir: Le *break;* permet de stopper une boucle ou la plupart des blocs depuis l'intérieur.*  
 `continue;` -> Break arrête le switch, continue passe au prochain
-`default:` -> Cas sans condition. Toujours vrai. *Facultatif, d'ailleurs il est même possible d'avoir un switch() vide.*  
+`default:` -> Cas sans condition. Toujours vrai. *(Facultatif, d'ailleurs il est même possible d'avoir un switch() vide.)*  
 Vous savez désormais tout sur les intérrupteurs !  
 C'est sûr que vous avez pas une *case* en moins !  
 Vous n'avez vraiment aucun *default* !  
