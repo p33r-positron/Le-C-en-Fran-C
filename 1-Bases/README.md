@@ -658,9 +658,9 @@ Grâce à des opérateurs, les voilà:
 `!a` La condition est vraie si a est faux.  
 `condition1 && condition2` La condition est vraie si condition1 est vraie et condition2 est vraie.  
 `condition1 || condition2` La condition est vraie si entre condition1 et condition2 une des deux (**MINIMUM**) est vraie.  
-
-C'est tout il me semble.  
-Continuons.  
+  
+"Achète des pommes <3" Il est revenu avec 2 pommes...  
+Continuons...  
 
 #### Else if
 
@@ -705,7 +705,211 @@ On met un Si dans un Sinon en somme.
 
 Celui là, c'est *un cas* ! Vous l'avez ? Ah oui je vous ai pas encore appris... Oups...  
 En gros switch ça veut dire intérrupteur en anglais, et ça à (un peu) de sens.  
-**\[COMING SOON\]**
+Switch va tester pleins de cas, à la différence de If/Else If/Else, il ne teste qu'une valeur mais il est plus rapide.  
+Exemple:  
+
+```c
+int a = 42;
+
+switch(a)
+{
+  case 2: //Dans le cas où a vaut 2...
+    faireUnTruc(); //...appeler cette fonction inexistante.
+    break; //Break -> Si a valait bien 2, s'arrêter ici et faire comme si le switch() était fini
+  case 42: //Dans le cas où a vaut 42 (C'est exact)...
+    ++a; //...on l'incrémente
+    break; //On s'arrête là
+  case 349: //Dans le cas où a vaut 349...
+    faireUnAutreTruc(); //..on appele cette fonction inexistante.
+    break; //On s'arrête là.
+  default: //Dans tous les autres cas...
+    a = 0; //...ré-assigner a à 0.
+    //Pas besoin de break, default est toujours le dernier
+}
+```
+
+Traductions:  
+`switch(x)` -> On fait passer la valeur de x dans un switch  
+`case y:` -> Dans le cas où x équivaut y, exécuter le code ci-dessous.  
+`break;` -> Dis au switch que c'est fini, dans le cas contraire on continue de rechercher dans le switch un `case u:` ou u équivaut x, ou un `default:`.  
+*//Vérité à savoir: Le *break;* permet de stopper une boucle ou la plupart des blocs depuis l'intérieur.*  
+`continue;` -> Break arrête le switch, continue passe au prochain
+`default:` -> Cas sans condition. Toujours vrai. *Facultatif, d'ailleurs il est même possible d'avoir un switch() vide.*  
+Vous savez désormais tout sur les intérrupteurs !  
+C'est sûr que vous avez pas une *case* en moins !  
+Vous n'avez vraiment aucun *default* !  
+On arrête là pour l'humour...  
+
+### Boucles
+
+"Tant que t'es dehors, achète du lait !", il n'est jamais revenu :(  
+
+#### Boucle while
+
+C'est la plus simple: En français ça veut dire "Tant que"  
+Pour faire simple:  
+```c
+while(condition)
+{
+  //Actions
+}
+```
+
+Comme pour le if/else if/else, vous pouvez vous passer d'acollades si vous n'avez qu'une action à faire.  
+Donc si vous avez bien compris, on peut faire quelque chose comme ça:  
+
+```c
+int i = 10; //i vaut 10
+
+while(i > 1) //Tant que i est strictement supérieur à 1...
+{
+  faireUnTruc(i); //...on appelle la fonction faireUnTruc() avec comme argument i...
+  i--; //...et on décrémente ce fameux i.
+}
+```
+
+Vous avez compris ce qu'on peut faire avec, n'est-ce pas ?  
+Là j'ai décompté de 10 à 0, mais dans la plupart des cas ça sera l'inverse:  
+
+```c
+int i = 0; //i vaut 0
+
+while(i < 15) //Tant que i est inférieur à 15...
+{
+  faireUnAutreTruc(i); //...on appele la fonction faireUnAutreTruc avec comme argument i...
+  i++; //...et on incrémente le fameux i.
+}
+//Résultat: La fonction "faireUnAutreTruc" sera exécutée 15 fois avec comme arguments: 0, puis 1, puis 2,..., puis 14.
+//Car oui, le premier tour sera fait avec i qui vaut 0 et non 1, donc oui ça sera exécuté 15 fois et non 14.
+//Si vous voulez une boucle qui commence par 1, mettez i = 1 comme assignation et i <= 15 comme condition.
+```
+
+Voilà je pense que vous avez compris.  
+Comme pour switch(), il y a `break;`, qui arrête, ici, la boucle.  
+Il y a aussi `continue;`, qui passe à la prochaine itération ("Au prochain tour") de la boucle.  
+Et il y a `goto`, qui ne vient pas des boucles d'ailleurs mais je vous déconseille vraiment de l'utiliser.  
+
+##### Goto et labels
+
+C'est vraiment pour ceux qui veulent hein, goto permet d'aller à un endroit du code qu'on à "labellé":  
+```c
+int a = 3;
+
+// goto abc; //On déplace le "curseur d'exécution" vers abc
+// J'ai commenté la ligne d'au-dessus car il vient juste après donc pas besoin de sauter vers lui.
+
+abc:
+  a++; //On incrément a
+  if(a > 30) //Si a est supérieur à 30...
+    goto abc; //On va à abc
+```
+Je vais pas rentrer dans les détails car sinon vous allez avoir du (code spaghetti)[https://fr.wikipedia.org/wiki/Programmation_spaghetti] et vous faire (manger par un T-rex)[https://xkcd.com/292/].  
+
+##### Boucles while infinies
+
+`while(1)`, voilà.  
+
+##### Boucles while d'attente
+
+Imaginons que (C'est faux bien évidemment), l'ordinateur mette la valeur de la dernière touche tapé dans la variable X.  
+Vous voudriez attendre que la touche 'A' soit tapée avant de continuer l'exécution.  
+```c
+while(X != 'A'); //Juste un point-virgule, pas de code inutile à mettre à l'intérieur.
+```
+
+#### Boucles do while
+
+C'est un peu comme while, à une différence près:  
+"Peu importe, si la condition est fausse, le code sera exécuté AU MOINS UNE FOIS." -M. Douwil (Do While)  
+Bref, pour faire simple: "On exécute, après on vérifie !"  
+~~Ou plutôt "On tape d'abord, on pose les questions en tapant !"~~  
+Voilà comment on fait:  
+
+```c
+int i = 0;
+
+do
+{
+  faireDesTrucs(); //On appelle la fonction faireDesTrucs...
+  i++; //...et après on incrémente i...
+} while(i >= 1 && i < 10); //Tant que i est supérieur ou égal à 1 ET qu'il est inférieur à 10
+```
+
+Si c'était une boucle while, le code n'aurait jamais été exécuté, alors que vu que le code à été exécuté au moins une fois...  
+...i sera incrémenté une première fois, remplira donc la condition, et c'est reparti pour 9 tours !  
+Un exemple d'utilité peut être ceci:  
+
+```c
+int nombreMystere = genererUnNombreAleatoireEntre(1, 10); //On verra ça dans un autre chapitre
+int nombreDeLUtilisateur = 0;
+int aGagne = 1;
+
+afficher("Bienvenue au jeu du nombre mystère ! Dîtes un nombre entre 1 et 10: "); //Au prochain chapitre, promis
+do
+{
+  demanderUnNombre(&nombreDeLUtilisateur); //On verra ça au prochain chapitre aussi, promis
+  if(nombreDeLUtilisateur == nombreMystere)
+  {
+    afficher("Bravo t'as gagné !");
+    aGagne = 1;
+    break;
+  }
+  else
+  {
+    afficher("Non, réessaye: ");
+    aGagne = 0;
+  }
+} while(aGagne == 0);
+
+afficher("Félicitations");
+```
+
+#### Boucles for
+
+Vous vous souvenez quand on faisais des boucles jusqu'à ce que i ai une certaine valeur ?  
+Les boucles for sont faîtes exprès pour ça, et donc nous faciliter la vie:  
+Syntaxe:  
+```c
+for(initialisation;condition;itération)
+{
+  //code
+}
+```
+Et bien évidemment comme les autres, si il n'y a qu'une seule action, on peut enlever les accollades !  
+Bref, on va voir un exemple:  
+```c
+for(int i = 0;i < 10;i++)
+{
+  fonctionA(i); //Appeler la fonction fonctionA avec i comme argument
+}
+```
+Ce qu'il faut bien comprendre, c'est que:  
+-L'initialisation sera exécutée une seule fois  
+-La condition sera vérifiée à chaque itération/tour  
+-L'itération sera exécutée à la fin de chaque itération/tour  
+  
+De plus:  
+-On peut utiliser `break;` et `continue;` comme pour les autres boucles  
+-On peut sauter n'importe quelle(s) étape(s) si on la fait déjà/l'a déjà fait:  
+```c
+int i = 0
+
+/*Exemple 1*/ for(/*On a déjà déclaré i*/;i < 10;i++)
+{
+  truc();
+}
+
+/*Exemple 2*/ for(i = 0;/*voir intérieur*/;/*voir intérieur*/)
+{
+  truc();
+  i++;
+  if(i < 10)
+    break;
+}
+```
+Vous voyez le truc je pense... J'espère ?  
+
+C'est tout pour les boucles en tout cas !  
 
 ## Les fonctions
 
@@ -807,6 +1011,11 @@ Alors votre programme est une fonction de type int oui.
 Pour la simple raison qu'il va retourner un code d'erreur, ici c'est zéro (Ça veut dire: "Pas d'erreur")  
 Il y a aussi 1 (Une erreur) et d'autres trucs, l'important c'est que zéro c'est pas d'erreur et le reste oui !  
 
+##### Voir le code d'erreur d'un programme
+
+Sous la plupart des systèmes: `echo $?`  
+Sous Windows: `echo %errorlevel%`  
+
 #### Pourquoi les arguments dans la fonction ?
 
 Vous avez sûrement remarqué le `int argc, char** argv`  
@@ -841,3 +1050,10 @@ int main(int argc, char** argv)
     return 1; //Erreur !
 }
 ```
+
+# Fin
+
+Maintenant que vous savez tout ça, vous êtes prêts pour le prochain chapitre, ou, enfin, on va...  
+...AFFICHER DU TEXTE À L'ÉCRAN !  
+C'est une révolution n'est-ce pas ? \:p  
+Bonne chance !  
