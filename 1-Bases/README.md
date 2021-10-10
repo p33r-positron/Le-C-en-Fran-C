@@ -185,7 +185,7 @@ Mais on va commencer par les Tableaux car c'est plus simple et nécéssaire !
 ###### Créer un Tableau
 
 Un tableau, c'est une liste d'éléments.  
-A savoir: En angalais on dit "array" et pas tableau ou liste, ça vous sera utile en cherchant sur google.  
+A savoir: En anglais on dit "array" et pas tableau ou liste, ça vous sera utile en cherchant sur google.  
 Bref, dans un tableau c'est plus ou moins:  
   
 -Quel taille ? (Définitif)  
