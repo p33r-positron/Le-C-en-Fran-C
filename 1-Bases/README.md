@@ -227,9 +227,17 @@ ages[0] = 6; //Maintenant, ages = {6, 63, 23, 34, 31, 349, 72, 2, (-1), 0};
 
 La fonction sizeof(array) permet de savoir la taille d'un tableau:  
 ```c
-int ages[10] = {18, 63, 23, 34, 31, 349, 72, 2, (-1), 0};
+char ages[10] = {18, 63, 23, 34, 31, 49, 72, 2, (-1), 0};
 int taille_ages = sizeof(ages); //taille_ages vaut 10
 ```
+
+/!\\ Attention: Suite à une demande je me dois de préciser (Car je l'ai oublié) de rappeler que:  
+sizeof(x) demande au compilateur le nombre d'octets que contient x.  
+Un *char* garde une valeur sur 1 octet, vu que *ages* contient 10 *char*, il contient 10 octets.  
+Si on avait mit, par exemple, des *short int*, taille_ages vaudrait 20.  
+Pour la simple raison que les *short int* utilisent deux octets par nombre, dans le but de garder des plus gros nombres !  
+Et un int normal lui, prend 4 octets, donc avec des int, taille_ages vaudrait 40 !  
+Ne pas oublier encore une fois: Tout est un nombre en C, donc je peux utiliser un *char* pour garder un nombre.  
 
 ###### Les chaînes de caractères
 
@@ -239,6 +247,17 @@ Je pense que certains qui ont vu les types de variables au début se sont dit:
 La réponse à ça: Les chaînes de caractères !  
 C'est simple: On fait un tableau de *char* !  
 *A savoir: En C les gens appellent ça des **char\****  
+  
+Bref: Si vous voulez quand même avoir la taille d'un tableau qui contient autre chose que des *char*:  
+(A voir après le moment ou je parle d'arithmétique, juste à savoir que `a/b` veut dire a divisé par b.)  
+```c
+type tableau[3] = {element1, element2, element3};
+int taille_tableau = sizeof(tableau)/sizeof(type);
+```
+Pour la simple raison que si, par exemple, type est *int*, il utilise 4 octets pour garder une valeur.  
+Donc sizeof(int) renverra 4 et sizeof(tableau) renverra 3\*4octets, donc 12.  
+Et sizeof(tableau)/sizeof(int) renverra 12/4, donc 3.  
+Le compte est bon :D  
 
 Donc voilà comment faire:
 ```c
