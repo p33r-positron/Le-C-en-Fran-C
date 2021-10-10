@@ -824,7 +824,7 @@ abc:
   if(a > 30) //Si a est supérieur à 30...
     goto abc; //On va à abc
 ```
-Je vais pas rentrer dans les détails car sinon vous allez avoir du (code spaghetti)[https://fr.wikipedia.org/wiki/Programmation_spaghetti] et vous faire (manger par un T-rex)[https://xkcd.com/292/].  
+Je vais pas rentrer dans les détails car sinon vous allez avoir du [code spaghetti](https://fr.wikipedia.org/wiki/Programmation_spaghetti) et vous faire [manger par un T-rex](https://xkcd.com/292/).  
 
 ##### Boucles while infinies
 
