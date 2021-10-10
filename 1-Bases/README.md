@@ -938,7 +938,7 @@ Enfin, on va (bientôt) pouvoir commencer à compiler du code !
 
 ### C'est quoi une fonction ?
 
-Telle une fonction mathématique, une fonction informatique prend (ou non) des argumenst et renvoie une valeur.  
+Telle une fonction mathématique, une fonction informatique prend (ou non) des arguments et renvoie une valeur.  
 Exemple: f(x) = x\*x  
 
 ### Déclarer une fonction
