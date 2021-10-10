@@ -1061,7 +1061,7 @@ int main(int argc, char** argv)
 {
   if(argc >= 2) //Si il y a au moins 2 arguments en comptant le nom du programme...
   {
-    char* argument1 = argv[1]
+    char* argument1 = argv[1];
     if(argument1[0] == 'A') //Si le premier caractère de argument1 est un A...
       return 0; //Pas d'erreur
     else
