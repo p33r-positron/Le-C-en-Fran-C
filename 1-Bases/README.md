@@ -653,7 +653,7 @@ if(a) //Si a est 'Vrai'...
 
 Else -> Sinon en anglais  
 Parfois, les conditions sont fausses, et on aimerait faire autre chose:  
-```
+```c
 int a = 0; //a est 'faux'
 
 if(a) //Si a est 'vrai' (Ce n'est pas le cas), l'action ci-dessous sera exécutée.
@@ -662,6 +662,7 @@ else //Autrement...
 {
   a = 349; //...a est ré-assigné à 349
 }
+```
 
 #### Petite pause de conditionnement
 
