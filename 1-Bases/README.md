@@ -238,15 +238,6 @@ Si on avait mit, par exemple, des *short int*, taille_ages vaudrait 20.
 Pour la simple raison que les *short int* utilisent deux octets par nombre, dans le but de garder des plus gros nombres !  
 Et un int normal lui, prend 4 octets, donc avec des int, taille_ages vaudrait 40 !  
 Ne pas oublier encore une fois: Tout est un nombre en C, donc je peux utiliser un *char* pour garder un nombre.  
-
-###### Les chaînes de caractères
-
-Je pense que certains qui ont vu les types de variables au début se sont dit:  
-"MISÉRICORDE ! IL N'Y A PAS DE *STRINGS* COMMENT VA-T-ON METTRE DU TEXTE DANS DES VARIABLES ?"  
-*\*String: "Chaîne de caractère" en anglais*  
-La réponse à ça: Les chaînes de caractères !  
-C'est simple: On fait un tableau de *char* !  
-*A savoir: En C les gens appellent ça des **char\****  
   
 Bref: Si vous voulez quand même avoir la taille d'un tableau qui contient autre chose que des *char*:  
 (A voir après le moment ou je parle d'arithmétique, juste à savoir que `a/b` veut dire a divisé par b.)  
@@ -259,6 +250,15 @@ Donc sizeof(int) renverra 4 et sizeof(tableau) renverra 3\*4octets, donc 12.
 Et sizeof(tableau)/sizeof(int) renverra 12/4, donc 3.  
 Le compte est bon :D  
 
+###### Les chaînes de caractères
+
+Je pense que certains qui ont vu les types de variables au début se sont dit:  
+"MISÉRICORDE ! IL N'Y A PAS DE *STRINGS* COMMENT VA-T-ON METTRE DU TEXTE DANS DES VARIABLES ?"  
+*\*String: "Chaîne de caractère" en anglais*  
+La réponse à ça: Les chaînes de caractères !  
+C'est simple: On fait un tableau de *char* !  
+*A savoir: En C les gens appellent ça des **char\****  
+  
 Donc voilà comment faire:
 ```c
 char prenom[4] = {'T', 'o', 'm', '\0'}; //Compliqué mais précis
