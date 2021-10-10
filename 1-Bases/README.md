@@ -151,7 +151,7 @@ b = c; //La valeur de b est désormais celle de c, donc l'ancienne valeur de a, 
 
 #### Bonus: La manière intelligente
 
-Je vous conseille de revenir ici après avoir vu les opérations arithmétiques sur ce README (Quand je les aurai écrite)  
+Je vous conseille de revenir ici après avoir vu les opérations arithmétiques sur ce README ~~(Quand je les aurai écrite)~~  
   
 Bref, si vous réfléchissez ou que vous êtes un peu matheux, vous avez peut-être pensé à ça:  
 ```c
