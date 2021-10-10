@@ -596,7 +596,7 @@ Les opérations binaries disponibles:
   
 -`&`, AND binaire  
 -`|`, OR binaire  
--`^`, XOR binaire
+-`^`, XOR binaire  
 -`~`, NOT binaire (Seulement une entrée)  
 -`<<` et `>>`, "shifts" à gauche/droite  
 
