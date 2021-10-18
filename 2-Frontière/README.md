@@ -64,7 +64,8 @@ int main(void) //Pas besoin d'arguments
   char lettreAmaj = 'A';
   write(1,&lettreAmaj,sizeof(char)); //On peut remplacer sizeof(char) par 1 ;)
   return 0;
-}```  
+}
+```  
 
 Explications:
 La variable lettreAmaj contient `'A'` (Ou 65 en ASCII)  
@@ -88,7 +89,8 @@ int main(void)
     write(1, &nom[i++], sizeof(char)); //On utilise i++ pour ne pas incrémenter juste après
   }
   return 0;
-}```  
+}
+```  
 Les petits malins savent qu'avec un char* on peut utiliser le tableau comme un pointeur et faire plus simple:  
 ```c
 #include <io.h>
@@ -102,7 +104,8 @@ int main(void)
     //nom++ incrémente déjà
   }
   return 0;
-}```  
+}
+```  
 Bref, maintenant que vous savez tout ça, on va passer à stdio !  
 
 # Texte avec stdio
@@ -121,7 +124,8 @@ int main(void)
   puts("Coucou tout le monde !");
   puts(message);
   return 0;
-}```  
+}
+```  
 
 ## Affichages Formattés
 
@@ -136,7 +140,8 @@ int main(void)
   int a = 349;
   printf("a vaut %d\n", a);
   return 0;
-}```  
+}
+```  
 \*Pour information: `\n` compte pour un seul caractère: un retour à la ligne.  
 Bref, ce programme affichera `a vaut 349` et un retour à la ligne  
 C'est super n'est-ce pas ?  
@@ -167,7 +172,8 @@ int main(void)
   //L'utilisateur, en appuyant sur entrée, à déjà fait un retour à la ligne :P
   printf("Vous avez %u ans !\n", age);
   return 0;
-}```  
+}
+```  
 Vous devriez comprendre en lisant mes commentaires :)  
 Bref, on peut demander un char (`%c`), un string/char\* (`%s`), un nombre à virgule float (`%f`), etc...  
 
@@ -189,7 +195,8 @@ int main(void)
   
   printf("%d est la racine carré de %d !\n", chiffre, carres[chiffre-1]); //Car les tableaux commencent à 0 :)
   return 0;
-}```  
+}
+```  
 
 ### Un string ?
 
@@ -204,7 +211,8 @@ int main(void)
   scanf("%s", prenom); //Un tableau est un pointeur :P
   printf("Bonjour, %s\n", prenom);
   return 0;
-}```  
+}
+```  
 Pauvre fou ! Vous voulez vraiment avoir un...
 ...***Buffer Overflow*** ? *Musique Dramatique*  
 (Buffer Overflow -> Dépassement de Tampon)  
@@ -221,7 +229,8 @@ int main(void)
   scanf("%31s", prenom); //Tableau->Pointeur | 1 de plus, 1 de moins (Au cas où pour le Null Terminator)
   printf("Bonjour, %s\n", prenom);
   return 0;
-}```  
+}
+```  
 
 ### Tout mélanger
 
