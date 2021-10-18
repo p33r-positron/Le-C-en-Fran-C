@@ -65,6 +65,7 @@ int main(void) //Pas besoin d'arguments
   write(1,&lettreAmaj,sizeof(char)); //On peut remplacer sizeof(char) par 1 ;)
   return 0;
 }```  
+
 Explications:
 La variable lettreAmaj contient `'A'` (Ou 65 en ASCII)  
 La fonction write prends 3 arguments: Où écrire (Le flux), un pointeur vers la valeur à écrire, la taille en octets de cette valeur  
