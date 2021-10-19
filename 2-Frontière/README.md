@@ -309,6 +309,9 @@ int main(void)
     else
     {
       puts("Regardez le contenu de test.txt :)");
+      writeTest = fclose(fichier); //Fermer le fichier
+      if(writeTest != 0)
+        puts("Erreur pendant la fermeture du fichier :(");
       return 0;
     }
   }
@@ -316,6 +319,8 @@ int main(void)
 ```  
 Pensez à regarder mes commentaires :)  
 ![](assets/fopen.png)  
+![](assets/fputs.png)  
+![](assets/fclose.png)  
 
 #### FILE* ?
 
