@@ -186,14 +186,13 @@ On va utiliser une propriétée interessante de scanf: la possibilité de limite
 int main(void)
 {
   int chiffre = 2;
-  int carres[9] = {1, 4, 9, 16, 25, 36, 49, 64, 81};
   do
   {
     printf("Entrez un chiffre entre 1 et 9 inclus: ");
     scanf("%1d", &chiffre); //Si l'utilisateur entre 349 (Par ex.), chiffre vaudra 3 !
   }while(chiffre < 1 || chiffre > 9); //Si l'utilisateur ne rentre rien, chiffre vaudra 0
   
-  printf("%d est la racine carré de %d !\n", chiffre, carres[chiffre-1]); //Car les tableaux commencent à 0 :)
+  printf("%d est la racine carré de %d !\n", chiffre, chiffre*chiffre); //Car les tableaux commencent à 0 :)
   return 0;
 }
 ```  
