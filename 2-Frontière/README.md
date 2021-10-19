@@ -16,7 +16,7 @@ Bref, voilà le petit guide pour résoudre les erreurs de compilation:
 2) Si vous parlez anglais (Vous le devriez, c'est utile :P) essayez de voir l'erreur, ou au pire, traduisez en ligne  
 3) Cherchez sur google en collant une partie de l'erreur, 99,99% de chance de trouver un lien sur le Saint-Forum, stackoverflow.com 
 
-Et pour les erreurs d'exécution, c'est soit le débogueur (On verra plus tard), soit mettre des printf\* partout. 
+Et pour les erreurs d'exécution, c'est soit le débogueur (On verra plus tard), soit mettre des printf\* partout.  
 \*printf: Vous allez bientôt voir :P  
 
 C'est tout pour les erreurs de compilation, mais retenez-le, ça va vous servir ! :)  
