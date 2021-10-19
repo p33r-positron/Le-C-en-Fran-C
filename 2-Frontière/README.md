@@ -239,16 +239,16 @@ int main(void)
 
 int main(void)
 {
-  char case = 'Z';
-  int nombre = 0;
+  char lettreCase = 'Z';
+  int nombreCase = 0;
   int retour = 0;
   puts("Bienvenue sur plateau d'echec simulator 2021 !");
   do
   {
     printf("Entrez une case: ");
-    retour = scanf("%c%d", &case, &nombre); //scanf renvoie le nombre de valeurs entrées, ici on en attend deux !
-  } while(retour != 2 || case < 'A' || case > 'H' || nombre < 1 || nombre > 8);
-  printf("Je teleporte mon roi et son katana laser en %c%d, echec et mat !\n", case, nombre);
+    retour = scanf("%c%d", &lettreCase, &nombreCase); //scanf renvoie le nombre de valeurs entrées, ici on en attend deux !
+  } while(retour != 2 || lettreCase < 'A' || lettreCase > 'H' || nombreCase < 1 || nombreCase > 8);
+  printf("Je teleporte mon roi et son katana laser en %c%d, echec et mat !\n", lettreCase, nombreCase);
   return 0;
 }
 ```  
