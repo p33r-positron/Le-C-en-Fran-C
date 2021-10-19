@@ -192,7 +192,7 @@ int main(void)
     scanf("%1d", &chiffre); //Si l'utilisateur entre 349 (Par ex.), chiffre vaudra 3 !
   }while(chiffre < 1 || chiffre > 9); //Si l'utilisateur ne rentre rien, chiffre vaudra 0
   
-  printf("%d est la racine carré de %d !\n", chiffre, chiffre*chiffre); //Car les tableaux commencent à 0 :)
+  printf("%d est la racine carré de %d !\n", chiffre, chiffre*chiffre); //chiffre est la racine carré de chiffre*chiffre
   return 0;
 }
 ```  
