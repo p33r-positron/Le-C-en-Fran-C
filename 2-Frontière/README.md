@@ -269,7 +269,8 @@ r -> read -> lire
 w -> write -> écrire  
 a -> append -> rajouter  
 b -> binary -> binaire  
-+ -> plus ?  
+\+ -> plus ?  
+  
 Si on ouvre le fichier en mode r, on peut seulement le lire.  
 Si on ouvre le fichier en mode w, il sera vidé si il existe, et on peut seulement écrire.  
 Si on ouvre le fichier en mode a, il sera crée si il n'existe pas, et on peut seulement écrire depuis la "fin".  
@@ -283,4 +284,47 @@ Si on ouvre le fichier en mode rb+, c'est comme r+ mais version binaire/rb (flem
 Si on ouvre le fichier en mode wb+, c'est comme w+ mais version binaire/wb (flemme).  
 Si on ouvre le fichier en mode ab+, c'est comme a+ mais version binaire/ab (flemme).  
   
-Suite pour plus tard
+### Pratique
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+  FILE* fichier = 0; //On met la valeur de fichier à 0
+  fichier = fopen("./test.txt", "a"); //Si le fichier n'arrive pas à s'ouvrir, fichier aura comme valeur NULL/0, donc il n'aura pas changé de valeur
+  if(fichier == 0) //Si il n'a pas changé de valeur, c'est qu'il y a une erreur
+  {
+    puts("Erreur pendant l'ouverture du fichier :(");
+    return 1;
+  }
+  else //Sinon on essaye d'écrire dans le fichier
+  {
+    int writeTest = fputs("Bonjour !\n", fichier); //fputs, lui, n'ajoute pas de nouvelle ligne automatiquement :(
+    if(writeTest < 0) //puts et fputs retournent une valeur >= 0 si tout va bien
+    {
+      puts("Erreur pendant l'écriture dans le fichier :(");
+      return 1;
+    }
+    else
+    {
+      puts("Regardez le contenu de test.txt :)");
+      return 0;
+    }
+  }
+}
+```  
+Pensez à regarder mes commentaires :)  
+![](assets/fopen.png)  
+
+#### FILE* ?
+
+On le verra plus tard, il existe **struct** un mot magique qui permet d'aller plus proche vers la programmation objet :)  
+Bref, stdio.h à crée le type FILE* (Et donc FILE) qui permet d'identifier un fichier.  
+
+#### ./test.txt
+
+./truc = Le fichier truc **dans le dossier d'exécution**  
+Avec certaines commandes il est possible d'utiliser le dossier ou se trouve le programme, je vous expliquerai la différence plus tard :)  
+
+Suite pour après.
