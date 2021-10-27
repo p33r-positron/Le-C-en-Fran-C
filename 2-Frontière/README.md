@@ -283,6 +283,10 @@ Si on ouvre le fichier en mode rb+, c'est comme r+ mais version binaire/rb (flem
 Si on ouvre le fichier en mode wb+, c'est comme w+ mais version binaire/wb (flemme).  
 Si on ouvre le fichier en mode ab+, c'est comme a+ mais version binaire/ab (flemme).  
   
+Ça à l'air un peu compliqué, donc j'ai pris la liberté de traduire un arbre de décision trouvé sur stackoverflow.com:  
+![](assets/rwa.png)  
+Créateur Original: Andrzej Pronobis  
+  
 ### Pratique
 
 ```c
@@ -323,12 +327,97 @@ Pensez à regarder mes commentaires :)
 
 #### FILE* ?
 
-On le verra plus tard, il existe **struct** un mot magique qui permet d'aller plus proche vers la programmation objet :)  
-Bref, stdio.h à crée le type FILE* (Et donc FILE) qui permet d'identifier un fichier.  
+On le verra plus tard, il existe **struct**: Un mot magique qui permet d'aller plus proche vers la programmation objet :)  
+Bref, stdio.h à crée le type FILE* (Ou plutôt FILE, FILE* est un pointeur) qui permet d'identifier un fichier.  
 
 #### ./test.txt
 
-./truc = Le fichier truc **dans le dossier d'exécution**  
+./test.txt = Le fichier test.txt **dans le dossier d'exécution**  
 Avec certaines commandes il est possible d'utiliser le dossier ou se trouve le programme, je vous expliquerai la différence plus tard :)  
+Bref, ./test.txt c'est test.txt, et c'est aussi .\\test.txt, ainsi que /<DossierActuel>/test.txt ou C:\\<DossierActuel>\\test.txt  
 
-Suite pour après.
+### Encore de la pratique
+
+```c
+#include <stdio.h>
+
+void cesar(char* caractere) //Utilisons les pointeurs !
+{
+  if((*caractere < 'A' || *caractere > 'Z') && (*caractere < 'a' || *caractere > 'z')) //Si ce n'est pas une lettre latine, fin!
+    return; //Une fonction s'arrête après un return
+  switch(*caractere) //Parce-que en césar après Z il y a A, ce n'est pas le cas en ASCII.
+  {
+    case 'X':
+      *caractere = 'A';
+      break;
+    case 'Y':
+      *caractere = 'B';
+      break;
+    case 'Z':
+      *caractere = 'C';
+    case 'x':
+      *caractere = 'a';
+      break;
+    case 'y':
+      *caractere = 'b';
+      break;
+    case 'z':
+      *caractere = 'c';
+    default:
+      *caractere = (*caractere) + 3; //On rajoute 3, on chiffre en césar !
+  }
+}
+
+int main(int argc, char** argv)
+{
+  if(argc != 2) //Vérification de si il y a exactement deux arguments (En comptant le programme, donc un seul vrai argument)
+  {
+    puts("Utilisation: cesar <fichier>"); //Message d'erreur
+    return 1;
+  }
+  //Ouverture du fichier en lecture
+  FILE* fichier = NULL;
+  fichier = fopen(argv[1], "r");
+  if(fichier == NULL) //En cas d'échec d'ouverture
+  {
+    puts("Erreur pendant l'ouverture du fichier en lecture."); //Message d'erreur
+    return 1; //Et Fin
+  }
+  //Calcul de la taille du fichier
+  unsigned int taille_fichier = 0;
+  char caractere = 0;
+  while(caractere != EOF) //Tant que le caractere n'est pas EOF (End Of File -> Fin De Fichier)
+  {
+    caractere = fgetc(fichier); //Ré-assigner caractere au prochain caractère du fichier
+    taille_fichier++; //Et incrémenter taille_fichier
+  }
+  //Création d'une variable contenant le fichier entier avec taille_fichier comme taille
+  char fichier_str[taille_fichier];
+  //Remplissage de la variable
+  fseek(fichier, 0, SEEK_SET); //De nos jours on peut faire "rewind(fichier);" c'est plus simple
+  caractere = 0; //Car caractere vaut EOF, impossible de démarrer la boucle
+  unsigned int i = 0; //Un i toujours positif et de bonne humeur
+  while(caractere != EOF) //Tant que le caractere n'est pas EOF (End Of File -> Fin De Fichier)
+  {
+    caractere = fgetc(fichier); //Ré-assigner caractere au prochain caractère du fichier
+    fichier_str[i++] = caractere; //Assigner le i ème élément de fichier_str à la valeur de caractere puis incrémenter i
+  }
+  printf("Fichier Original:\n\n%s\n\n", fichier_str); //Afficher le fichier original actuellement dans fichier_str
+  for(i = 0 ; i < taille_fichier ;) //Mettre i à 0, et tant que i est inférieur à taille_fichier...
+    cesar(&fichier_str[i++]); //...Appeler la fonction cesar avec l'adresse du i ème élément de fichier_str puis incrémenter i
+  printf("Fichier suite au chiffrement:\n\n%s\n\n", fichier_str); //Afficher la version chiffrée du fichier
+  fichier = freopen(argv[1], "w", fichier); //On réouvre le fichier en mode écriture //Ré-ouvrir le fichier en mode écriture
+  if(fichier == NULL) //En cas d'échec de ré-ouverture
+  {
+    puts("Erreur pendant l'ouverture du fichier en inscription."); //Message d'erreur
+    return 1; //Et fin
+  }
+  fputs(fichier_str, fichier); //On écrit le nouveau fichier_str dans fichier avec fputs(); !
+  puts("Votre fichier est maintenant sous un chiffrement portant le nom d'un certain 'Jules' empereur de Rome."); //On verra après pour les accents sous Windaube
+  fclose(fichier); //Fermer le fichier pour des raisons de sécurité
+  return 0; //Fin du programme sans erreurs
+}
+```
+  
+J'explique plus tard, pour ceux qui ont compris:  
+TP: Faire le programme inverse (Déchiffrer le code de césar)  
