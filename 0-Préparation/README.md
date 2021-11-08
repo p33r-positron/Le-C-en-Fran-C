@@ -57,7 +57,7 @@ Les Free/Open/Net BSD devraient avoir clang de base ou GCC
 ## Dernières choses  
   
 Il vous faut un éditeur de texte, le bloc-note integré à votre système (Notepad, TextEdit, Leafpad, Mousepad...) suffira.  
-Mais je vous conseille d'installer un bon éditeur de texte tel que Notepad++ sous Windows ou Sublime Text (Tout système)  
+Mais je vous conseille d'installer un bon éditeur de texte tel que Notepad++ sous Windows ou Sublime Text / Codium (fork de Vscode sans les cachoteries de microsoft ) pour tout système.  
   
 ## Fin  
   
