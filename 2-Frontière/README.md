@@ -375,6 +375,7 @@ int main(int argc, char** argv)
     puts("Utilisation: cesar <fichier>"); //Message d'erreur
     return 1;
   }
+
   //Ouverture du fichier en lecture
   FILE* fichier = NULL;
   fichier = fopen(argv[1], "r");
@@ -383,6 +384,7 @@ int main(int argc, char** argv)
     puts("Erreur pendant l'ouverture du fichier en lecture."); //Message d'erreur
     return 1; //Et Fin
   }
+
   //Calcul de la taille du fichier
   unsigned int taille_fichier = 0;
   char caractere = 0;
@@ -391,33 +393,245 @@ int main(int argc, char** argv)
     caractere = fgetc(fichier); //Ré-assigner caractere au prochain caractère du fichier
     taille_fichier++; //Et incrémenter taille_fichier
   }
+
   //Création d'une variable contenant le fichier entier avec taille_fichier comme taille
   char fichier_str[taille_fichier];
+
   //Remplissage de la variable
   fseek(fichier, 0, SEEK_SET); //De nos jours on peut faire "rewind(fichier);" c'est plus simple
+
   caractere = 0; //Car caractere vaut EOF, impossible de démarrer la boucle
   unsigned int i = 0; //Un i toujours positif et de bonne humeur
+
   while(caractere != EOF) //Tant que le caractere n'est pas EOF (End Of File -> Fin De Fichier)
   {
     caractere = fgetc(fichier); //Ré-assigner caractere au prochain caractère du fichier
     fichier_str[i++] = caractere; //Assigner le i ème élément de fichier_str à la valeur de caractere puis incrémenter i
   }
+
   printf("Fichier Original:\n\n%s\n\n", fichier_str); //Afficher le fichier original actuellement dans fichier_str
+
   for(i = 0 ; i < taille_fichier ;) //Mettre i à 0, et tant que i est inférieur à taille_fichier...
     cesar(&fichier_str[i++]); //...Appeler la fonction cesar avec l'adresse du i ème élément de fichier_str puis incrémenter i
+
   printf("Fichier suite au chiffrement:\n\n%s\n\n", fichier_str); //Afficher la version chiffrée du fichier
+
   fichier = freopen(argv[1], "w", fichier); //On réouvre le fichier en mode écriture //Ré-ouvrir le fichier en mode écriture
   if(fichier == NULL) //En cas d'échec de ré-ouverture
   {
     puts("Erreur pendant l'ouverture du fichier en inscription."); //Message d'erreur
     return 1; //Et fin
   }
+
   fputs(fichier_str, fichier); //On écrit le nouveau fichier_str dans fichier avec fputs(); !
+
   puts("Votre fichier est maintenant sous un chiffrement portant le nom d'un certain 'Jules' empereur de Rome."); //On verra après pour les accents sous Windaube
+
   fclose(fichier); //Fermer le fichier pour des raisons de sécurité
+
   return 0; //Fin du programme sans erreurs
 }
 ```
   
 J'explique plus tard, pour ceux qui ont compris:  
 TP: Faire le programme inverse (Déchiffrer le code de césar)  
+[Correction du TP](/TP/decesar.c)  
+  
+PS: On verra comment faire pour les accents sur Windows dans le prochain chapitre ;)  
+
+### fprintf, fwrite, fread, fseek... fichtre !
+
+fprintf et fgetc ont beau nous suffire pour l'instant, il n'existent pas qu'eux dans ce monde !  
+Par exemple, beaucoup de gens utilisent fwrite à la place de fputs:  
+
+![](/assets/fwrite.png)  
+
+C'est utile pour afficher seulement les premiers caractères d'un texte sans le couper :D  
+Et aussi pour de la précision en général :)  
+  
+Alors voilà un petit exemple:  
+```c
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+	//Petite information: atoi(char* str); transforme un string/char* en nombre ('2' -> 2, "42" -> 42...)
+
+	if(argc != 2) //Si il n'y a pas exactement 2 arguments (En comptant le programme)
+	{
+		puts("Utilisation: alphabetnul <nombre>");
+		puts("Action: affiche les <nombre> premières lettres de l'alphabet.");
+		return 1;
+	}
+	
+	const unsigned int lettres = atoi(argv[1]); //Nombre non signé -> Si il est négatif il sera très grand :D
+	
+	if(lettres > 26) //Il y a 26 lettres dans l'alphabet, et comme dit précédemment, si le nombre est négatif il sera très grand...
+	{
+		puts("Il n'y a que 26 lettres dans l'alphabet latin :P");
+		return 1;
+	}
+	
+	//Aussi si on dit 0, pas de lettres >:)
+	//On va pas faire bosser fwrite pour si peu ? :snif:
+	
+	if(!lettres) //0 est faux hein :P
+		return 0;
+	else if(lettres == 1) //Si on demande une seule lettre...
+	{
+		putchar('A'); //Emballé c'est pesé !
+	}
+	
+	//Petite information (bis): stdout représente le flux de sortie en ligne de commande du programme
+	//En gros, stdout c'est un "faux fichier" qui pointe vers la sortie, et écrire dedans c'est comme utiliser puts(); :D
+	
+	fwrite("ABCDEFGHIJKLMNOPQRSTUVWXYZ", sizeof(char), lettres, stdout); //Et voilà ! :D
+	
+	putchar('\n'); //Un petit retour à la ligne ? :P
+	
+	return 0;
+}
+```
+
+Aussi (Désolé de ne pas l'avoir dit plus tôt), putchar c'est comme puts, mais ça affiche seulement un caractère :O  
+  
+On va aussi aller voir du côté de la lecture, car les boucles de fgetc c'est pas joli-joli :c  
+Donc souhaitez la bienvenue à fread et fgets !
+
+##### fread
+
+Tout pareil que fwrite, à peu de choses près !  
+
+![](/assets/fread.png)  
+
+Et... un exemple:
+```c
+#include <stdio.h>
+
+int main(void)
+{
+	char memoire[101];
+	FILE* fichier = NULL;
+	
+	fopen("test.txt", "r");
+	
+	if(!fichier)
+	{
+		puts("Impossible d'ouvrir le fichier test.txt :(");
+		return 1;
+	}
+	
+	fread(memoire, sizeof(char), 100, fichier);
+	
+	puts("Voici les 100 premiers caractères de test.txt:\n");
+	puts(memoire);
+
+	return 0;
+}
+```
+
+##### fgets
+
+![](/assets/fgets.png)  
+
+Ça permet de lire depuis un fichier (Donc flux).  
+  
+Exemple avec le clavier:  
+```c
+#include <stdio.h>
+
+int main(void)
+{
+	char input[32]; //fgets ajoute le null terminator tout seul, pas besoin de demander 33 chars.
+	
+	fputs("Entrez un truc: ", stdout); //stdout -> écran, fputs ne rajoute pas de retour à la ligne.
+	
+	fgets(input, 32, stdin); //stdin -> standard input -> entrée standard -> clavier
+	
+	printf("Vous avez dit: %s\n", input);
+	
+	return 0;
+}
+```
+
+###### hmm ?
+
+-"hé mais attends je connais une autre fonction qui s'appelle get-"  
+-*giffle*  
+  
+Chhhutt...  
+  
+1ère règle: On ne parle pas de gets.  
+2nde règle: On NE PARLE PAS de gets.
+  
+Cette fonction est morte depuis la "révision" C11 du C.  
+Sa syntaxe était: `gets(char* pointeur);`  
+Vous voyez le problème ? Non ?  
+IL EST IMPOSSIBLE DE LIMITER LE NOMBRE DE CARACTÈRES ENTRÉS >:D  
+Paye ton buffer overflow :c  
+
+##### fseek
+
+On l'a déjà utilisé avant, c'est simple, il sert à changer l'endroit du "curseur" du fichier.  
+Sa syntaxe est:  
+`fseek(FILE* flux, long decalage, int d_ou);`  
+  
+flux c'est le flux/fichier  
+decalage c'est le nombre d'octets en mode binaire (Ou une valeur retournée par `ftell();`) à avancer depuis le 0ème caractère  
+d_ou c'est soit SEEK_SET (constante qui vaut 0), SEEK_CUR (constante qui vaut 1) ou SEEK_END (constante qui vaut 2)  
+  
+Dans l'ordre, les valeurs de d_ou permettent de:  
+-Partir du début du fichier  
+-Partir de la position actuelle du fichier  
+-Partir de la fin du fichier  
+Et à ça on ajoute le décalage :D  
+  
+Si il n'y a pas d'erreur, la fonction retourne 0, sinon autre chose.    
+
+##### ftell
+
+À l'inverse de fseek, ftell permet de savoir la position actuelle du fichier.  
+Sa syntaxe est:  
+`ftell(FILE* flux);`  
+  
+flux c'est le flux/fichier  
+  
+Si il n'y a pas d'erreur, la fonction retourne 0, si au contraire il y en a une, la fonction retourne (-1).  
+  
+Un exemple d'utilisation: Trouver *facilement* la taille d'un fichier  
+
+```c
+#include <stdio.h>
+
+int main(void)
+{
+	FILE* fichier = NULL;
+	
+	fichier = fopen("test.txt", "r");
+	
+	if(!fichier)
+	{
+		fputs("Erreur pendant l'ouverture du fichier test.txt\n", stderr); //stderr -> stdandard error -> erreur standard -> flux pour les erreurs
+		//Sur une console/un terminal basique, on voit pas la différence entre stdout et stderr d'ailleurs
+		return 1;
+	}
+	
+	fseek(fichier, 0, SEEK_END); //On met le fichier à sa fin donc pas besoin de décalage.
+	unsigned int taille fichier = ftell(fichier); //Vu qu'on est à la fin du fichier on peut savoir sa taille facilement
+	fseek(fichier, 0, SEEK_SET); //Retour au début, sans même utiliser rewind(fichier); !
+	
+	char fichier_entier[taille_fichier]; //Créer une variable pour là où garder le fichier
+	fread(fichier_entier, sizeof(char), taille_fichier, fichier); //Lire le fichier et le mettre dans la variable ci-dessus
+	
+	printf("Voilà le contenu entier de test.txt !\n\n%s\n\n-------FIN-------\n", fichier_entier);
+	
+	return 0;
+}
+```
+
+# Fin
+
+Je pense que tout ça vous suffira, maintenant vous pouvez faire joujou avec les fichiers !  
+Essayez de faire deux-trois trucs intéressant, si vous avez des corrections n'oubliez pas de les mettre en pull request...  
+Pour le prochain chapitre je vous ferai juste savoir des trucs intéressants, qui vous seront utiles.  
+Exemple: Comment afficher ces fichus accents sur Microdoux Windaube :P  
