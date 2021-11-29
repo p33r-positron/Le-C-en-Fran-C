@@ -590,7 +590,7 @@ Je vais pas m'attarder dessus, mais pour faire simple:
 1) On convertit les nombres en binaire/Base 2  
 2) On fait passer les nombres par des *portes logiques*\*  
   
-\*Porte Logique: Opération binaire, voir sur google ou (ici)[] (Lien non existant pour l'instant)  
+\*Porte Logique: Opération binaire, voir sur google ou (ici)[http://www.ac-grenoble.fr/lycee/triboulet.romans/IMG/pdf/Les_portes_logiques.pdf]  
 
 Les opérations binaries disponibles:  
   
@@ -673,7 +673,7 @@ Grâce à des opérateurs, les voilà:
 `a < b` La condition est vraie si a est **strictement** (Donc non égal) inférieur à b.  
 `a > b` La condition est vraie si a est **strictement** (Donc non égal) supérieur à b.  
 `a <= b` La condition est vraie si a est inférieur ou égal à b.  
-`a >= b` La condition est vraie si a est supérieur ou égal à b. 
+`a >= b` La condition est vraie si a est supérieur ou égal à b.  
 `a != b` La condition est vraie si a est différent (non-égal) de b.  
 `!a` La condition est vraie si a est faux.  
 `condition1 && condition2` La condition est vraie si condition1 est vraie et condition2 est vraie.  
