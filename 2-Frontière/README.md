@@ -44,10 +44,21 @@ char nom[4] = {'L', 'e', 'o', '\0'};
 On rajoutait toujours ce fameux `'\0'`, qui signifie l'élément Nº0 de la table ASCII, c'est à dire le null terminator  
 Vous allez bientôt comprendre son utilité ;)  
   
-Pour commencer, on va utiliser la bibliothèque io, qui permet de faire des entrées sorties de bas niveau  
+Pour commencer, on va utiliser la bibliothèque io/unistd, qui permet de faire des entrées sorties de bas niveau  
+\[CORRECTION\]: Sous Micro$oft Windows c'est io.h, sous tous les autres systèmes (Enfin la norme POSIX / Type UNIX) c'est unistd.h (normalement)  
+La bonne chose à faire serait:  
+```c
+#if defined(WIN32) || defined(_WIN32) //Si on détecte Windows
+#include <io.h> //Alors io.h
+#else //Sinon
+#include <unistd.h> //Alors unistd.h
+#endif //Fin
+```  
 Dans votre main.c, mettez:  
 ```c
-#include <io.h>
+//Faîtes votre choix, ou copiez-collez le petit code ci-dessus à la place
+//#include <io.h> //Décommentez pour Windows, commentez pour POSIX/Type UNIX
+#include <unistd.h> //Décommentez pour POSIX/Type UNIX, commentez pour Windows
 
 int main(void)
 {
@@ -57,12 +68,14 @@ int main(void)
 ```  
 Maintenant, on va afficher un caractère tout seul pour commencer:  
 ```c
-#include <io.h>
+//Pour la suite du cours je laisse unistd.h, si vous voulez tester sous Windows n'oubliez pas
+//de remplacer par io.h ou par le code en haut afec les #if / #else / #endif
+#include <unistd.h>
 
 int main(void) //Pas besoin d'arguments
 {
   char lettreAmaj = 'A';
-  write(1,&lettreAmaj,sizeof(char)); //On peut remplacer sizeof(char) par 1 ;)
+  write(1, &lettreAmaj, sizeof(char)); //On peut remplacer sizeof(char) par 1 ;)
   return 0;
 }
 ```  
@@ -78,7 +91,7 @@ Bref, si on compile et exécute tout ça, on devrait voir le caractère `A` !
 
 Pareil, mais avec une boucle !  
 ```c
-#include <io.h>
+#include <unistd.h>
 
 int main(void)
 {
@@ -93,7 +106,7 @@ int main(void)
 ```  
 Les petits malins savent qu'avec un char* on peut utiliser le tableau comme un pointeur et faire plus simple:  
 ```c
-#include <io.h>
+#include <unistd.h>
 
 int main(void)
 {
@@ -112,6 +125,9 @@ Bref, maintenant que vous savez tout ça, on va passer à stdio !
 
 Une bibliothèque qui vous servira toute votre vie :D  
 stdio -> standard input/ouput -> entrée/sortie standard  
+Ça va vous faciliter la vie, maintenant que vous avez compris le write(), laissez tomber !  
+Faîtes juste `putchar('A');` !  
+Bref.  
 C'est une bibliothèque qui contient plein de fonctions très utiles, dont la première qu'on va utiliser:  
 ![](assets/puts.png)  
 Exemple d'utilisation:  
