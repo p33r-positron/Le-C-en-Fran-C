@@ -86,3 +86,227 @@ Ajoutez la bibliothèque string.h, qui contient plein d'outils pour ravir vos ch
 `#include <string.h>`  
 Désormais, pour avoir la longueur d'une chaîne de caractère, faîtes juste:  
 `strlen(char* texte);`  
+
+## strcpy
+
+Le saviez-vous ? Vous pouvez remplacer le contenu d'une chaîne de caractères !  
+  
+Alors oui, certains vont me dire "Beh il faut juste faire `chaine = "Koukou";` pour la réassigner !"  
+Et bien non ! Ce n'est pas si simple...  
+N'oubliez pas que chaine est un pointeur vers la chaîne de caractère, on ne peut pas faire ça comme ça !  
+Donc la "Bonne" manière de le faire c'est:  
+```c
+char chaine[16] = "Coucou !";
+chaine[0] = 'K';
+chaine[3] = 'k';
+```  
+Au moins c'est précis non ? <:D  
+  
+Bref, même si pour changer un ou deux caractères ça peut être utile, pour changer une chaîne de caractères entière c'est embêtant !  
+C'est la que strcpy intervient !  
+```c
+#include <string.h>
+#include <stdio.h> //Pour printf
+
+int main(int argc, char** argv)
+{
+  char chaine[16] = "Jean-Claude";
+  printf("Contenu de chaine: %s\n", chaine);
+  strcpy(chaine, "Kevin");
+  printf("Contenu de chaine: %s\n", chaine);
+  
+  return 0;
+}
+```  
+Voilà, vous venez de réassigner une chaîne de caractères !  
+
+### Attention aux buffer overflow !
+
+N'oubliez pas que strcpy est en fait un raccourci pour:  
+```c
+void strcpy_improvise(char* source, char* remplacant)
+{
+  while(*remplacant)
+  {
+    *source++ = *remplacant++;
+  }
+}
+```  
+Donc la fonction arrête de copier quand elle finit remplacant !  
+En bref: Si remplacant est plus gros que source, il va:  
+1) Écraser le null terminator (Donc RIP pour le réutiliser)  
+2) Écrire je ne sais pas où dans la mémoire (Ça pourrait écraser la mémoire réservé à d'autres applications, et ça crée des problèmes de sécurité)  
+Bref, soyez vigilents avec strcpy !  
+
+### strncpy
+
+Pareil que strcpy mais permet de limiter le nombre de caractères à copier.  
+Exemple:  
+```c
+#include <string.h>
+#include <strdio.h> //Pour le printf
+
+int main(int argc, char** argv)
+{
+  char prenom[16] = "Jean-Jacques";
+  char prenoms[20] = "Kevin Jean Marie";
+  
+  strncpy(prenom, prenoms, 5);
+  
+  printf("Prenom: %s\n", prenom");
+
+  return 0;
+}```  
+Ça permet aussi d'éviter les "Buffer Overflow" dits ci-dessus: `strncpy(source, destination, sizeof(source) - strlen(destination) );`  
+
+#### Valeur de retour : char* (On retourne le char* "source" demandé, pour que ça soit pratique emboité)
+
+## strcat
+
+Le saviez-vous ? Vous pouvez *concatener* deux chaînes de caractères !  
+\*concatener: Rassembler deux chaînes de caractères  
+C'est simple: Utilisez strcat !  
+```c
+#include <string.h>
+#include <stdio.h> //Pour printf
+
+int main(int argc, char** argv)
+{
+  char nom_complet[16] = "Kevin";
+  char nom_de_famille[8] = "Dubois";
+  
+  strcat(nom_complet, " "); //On rajoute un espace, conseil: Faîtes le "manuellement"
+  strcat(nom_complet, nom_de_famille);
+  
+  printf("Nom Complet: %s\n", nom_complet);
+
+  return 0;
+}
+```  
+
+A retenir: La chaîne rajouté n'est pas modifiée.  
+
+### strncat
+
+Presque pareil, mais ça vous laisse choisir le nombre maximum de caractères à rajouter:  
+```c
+#include <string.h>
+#include <stdio.h> //Pour printf
+
+int main(int argc, char** argv)
+{
+  char nom_complet[16] = "Kevin";
+  char noms_de_famille[32] = "Dubois Dupont et Dupont";
+  
+  strncat(nom_complet, noms_de_famille, 6);
+  
+  printf("Nom Complet: %s\n", nom_complet);
+  
+  return 0;
+}
+```  
+strncat peut vous être utile pour éviter les "Buffer Overflow" dits plus tôt:  
+`strncat(source, remplacant, sizeof(source) - strlen(remplacant) );`  
+
+#### Valeur de retour : char* (On retourne le char* "source" demandé, pour que ça soit pratique emboité)
+
+## strcmp
+
+Le saviez-vous ? Vous pouvez savoir si deux chaînes de caractères sont égales !  
+Grâce à strcmp on peut savoir ça !  
+C'est simple:  
+`strcmp(char* chaine1, char* chaine2);`  
+Si chaine1 est égale à chaine2 (Attention à la casse: A et a sont différents !) ça retourne 0  
+Sinon il la différence va se sentir à un moment et:  
+1) Retourne une valeur négative si le premier caractère différent entre chaine1 et chaine2 est plus bas (Dans la table ASCII) dans chaine1 que dans chaine2  
+2) Retourne une valeur positive si le premier caractère différent entre chaine1 et chaine2 est plus haut (Dans la table ASCII) dans chaine1 que dans chaine2  
+  
+En gros si chaine1 et chaine2 sont pareilles, ça retourne 0, sinon, ça retourne la différence entre les deux au niveau du caractère "problèmatique"  
+  
+Truc pratique: Vu que 0 est faux, on peut utiliser `if(!strcmp(chaine1, chaine2))` pour faire un truc quand chaine1 et chaine2 **sont** égales  
+  
+Exemple:  
+```c
+#include <string.h>
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  char entree[32] = {0}; //On remplit entree de zéros (Null terminator)
+  char* reponse = "positron"; //Maman je passe à la télé !
+  
+  while(strcmp(entree, reponse)) //Tant que le strcmp est "vrai" (Donc pas 0, donc tant que les deux chaînes ne sont pas égales)
+  {
+    printf("Devine mon pseudo ? ");
+    scanf("%31s", entree);
+  }
+  
+  puts("Oui, bravo !");
+  
+  return 0;
+}```  
+
+## system
+
+Le saviez-vous ? Vous pouvez exécuter des commandes du terminal depuis un programme C !  
+En gros, pour ceux qui connaissent, vous pouvez exécuter du Batch (Windows) ou du Bash (Type UNIX) depuis votre code C ! :D  
+Pour les autres, dîtes vous que en gros vous pouvez lancer des commandes dans le Terminal/CMD depuis votre programme en C :)  
+  
+Entre autre, ça peut permettre de faire appel à un autre programme, par hasard, que vous avez fait :D  
+  
+```c
+#include <stdlib.h> //La bibliothèque nécéssaire
+#include <string.h> :D
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  puts("Terminal v0.0.0.0.1");
+  puts("Tapez 'exit' pour quitter");
+  puts("Commandes de maximum 64 caractères dû à des restrictions budgétaires");
+
+  char entree[65];
+  int code_erreur;
+
+  do
+  {
+    printf("Commande siouplé: ");
+    scanf("%64s", entree);
+    
+    if(!strcmp(entree, "exit"))
+      break; //Sortir de la boucle
+    
+    code_erreur = system(entree); //Ça exécute la commande et ça affiche les résultats dans le terminal utilisateur
+    //Nous on a juste le droit au code d'erreur :(
+    printf("\n-------- CODE D'ERREUR DU PROGRAMME: %d --------\n");
+  } while(1); //Boucle infinie
+  
+  puts("Aurevoir !");
+  
+  return 0;
+}```  
+  
+TP: Faîtes un mini terminal comme ça mais qui sert juste à lire des fichiers :D  
+(En bref vous demandez à l'utilisateur des noms de fichier à lire, ne pas oublier le fclose ! >:c)  
+
+### Les accents sur Windows
+
+Chose promise, chose due ! :)  
+En fait non, ça vous apprendra à utiliser un système d'exploitation propriétaire >:D  
+Vive les manchots ! >:D  
+  
+  
+  
+  
+  
+Je rigole ne partez pas ! <:)  
+Bon, pour faire simple, sur MicroDoux Fenêtre, il existe une commande pour changer la "page de texte"  
+En français: On peut modifier la "table" (Comme la table ASCII) au niveau du Terminal (CMD du coup)  
+Il suffit de faire `chcp 65001` pour avoir les jolis accents sans galérer :D  
+  *Ce conseil vaut aussi pour les développeurs Batch*  
+Et vu que maintenant avec `system` on peut exécuter des commandes en terminal... >:D  
+`system("chcp 65001 > nul");`  
+Le "> nul" c'est pour enlever la sortie du programme histoire d'éviter que ça affiche le message de changement de "page de texte" O:)  
+Profitez des accents, laveurs de carreaux ! :D  
+
+### Coming soon
