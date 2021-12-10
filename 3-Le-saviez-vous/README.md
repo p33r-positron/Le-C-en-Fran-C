@@ -156,7 +156,8 @@ int main(int argc, char** argv)
   printf("Prenom: %s\n", prenom");
 
   return 0;
-}```  
+}
+```  
 Ça permet aussi d'éviter les "Buffer Overflow" dits ci-dessus: `strncpy(source, destination, sizeof(source) - strlen(destination) );`  
 
 #### Valeur de retour : char* (On retourne le char* "source" demandé, pour que ça soit pratique emboité)
@@ -244,7 +245,8 @@ int main(int argc, char** argv)
   puts("Oui, bravo !");
   
   return 0;
-}```  
+}
+```  
 
 ## system
 
@@ -284,7 +286,8 @@ int main(int argc, char** argv)
   puts("Aurevoir !");
   
   return 0;
-}```  
+}
+```  
   
 TP: Faîtes un mini terminal comme ça mais qui sert juste à lire des fichiers :D  
 (En bref vous demandez à l'utilisateur des noms de fichier à lire, ne pas oublier le fclose ! >:c)  
