@@ -312,4 +312,158 @@ Et vu que maintenant avec `system` on peut exécuter des commandes en terminal..
 Le "> nul" c'est pour enlever la sortie du programme histoire d'éviter que ça affiche le message de changement de "page de texte" O:)  
 Profitez des accents, laveurs de carreaux ! :D  
 
-### Coming soon
+## fflush
+
+Le saviez-vous ? Vous pouvez changer le "flux d'écriture principal" de votre programme :D  
+Vous avez rien compris ? Un exemple vaut mille mots:  
+```c
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  FILE* fichier = NULL; //Pointeur fichier vide/NULL/0
+  fichier = fopen("./test.txt", "w"); //On crée/vide/overwrite test.txt
+  if(!fichier) //NULL = 0 = Faux
+  {
+    puts("Erreur pendant l'ouverture de test.txt :(");
+    return 1;
+  }
+  
+  fflush(fichier); //Démonstration...
+  
+  puts("KOUKOU LE FICHIER"); //Cette phrase sera écrite DANS LE FICHIER
+  
+  //En gros, après un fflush on passe le relai au fichier donné pour toutes les écritures
+  //Donc ce qui est sensé aller vers la console, va vers le fichier :o
+  
+  fflush(stdout); //Retour à la normale (stdout -> standard output -> sortie standard -> le terminal en gros)
+  
+  puts("Ouvrez test.txt ! :D");
+  
+  fclose(fichier); //On ferme le fichier :D
+
+  return 0;
+}
+```  
+
+Bon vous avez l'idée :D
+
+#### Valeur de retour
+
+int, 0 si tout va bien  
+
+## remove
+
+Le saviez-vous ? Vous pouvez supprimer des fichiers ! >:D  
+On a vu comment lire, remplacer, ajouter du texte à des fichiers, mais pas comment les supprimer :(  
+Bien sur, vous pourriez utiliser system et faire `system("rm -f poubelle.txt");` ou `system("del poubelle.txt");` :O  
+Mais si on part sur ce chemin vous allez juste finir par écrire du Bash/Batch :(  
+Bref:  
+`remove("nom_du_fichier.txt"); //Par exemple`  
+
+#### Valeur de retour
+
+int, 0 si le fichier à bien été supprimé, autre chose pour les erreurs (Ex: permissions)  
+
+## rename
+
+Le saviez-vous ? Vous pouvez renommer des fichiers :)  
+`rename("ancien_nom.txt", "nouveau_nom.txt");`  
+
+#### Valeur de retour
+
+int, 0 si tout va bien, autre chose si erreur (Ex: permissions)  
+
+## tmpfile et tmpnam
+
+Le saviez-vous ? Vous pouvez avoir des fichiers temporaires, pour... Faire des trucs temporaires  
+
+### tmpnam
+
+tmpnam permet de générer le nom/chemin de votre fichier temporaire :)  
+En fait, ça sert à générer un nom de fichier en étant sur qu'il n'appartient pas à un fichier existant :O  
+C'est pour éviter d'écraser les données de votre utilisateur <:)  
+
+```c
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  char nom_tmp[L_tmpnam]; //L_tmpnam est une constante (de précompilation, voir #define) contenant la taille maximum d'un nom de fichier crée avec tmpnam
+  tmpnam(nom_tmp); //nom_tmp contient désormais le nom de fichier temporaire
+
+  FILE* tmp = NULL;
+  tmp = fopen(nom_tmp, "w");
+  if(!tmp)
+  {
+    puts("Erreur ouverture fichier temporaire :c");
+    return 1;
+  }
+  
+  fputs(tmp, "koukou");
+  //trucs à faire
+  rewind(tmp);
+  char c;
+  while(c != EOF)
+  {
+    c = fgetc(tmp);
+    putchar(c); //Je sais pas si je l'ai dit: putchar sert à afficher à l'écran un seul caractère :D
+    //Pensez-y si vous devez juste faire un retour à la ligne ou quoi, performances++ :D
+  }
+  putchar('\n'); //Retour à la ligne
+  fclose(tmp);
+  remove(nom_tmp); //Adieu fichier temporaire :'(
+
+  return 0;
+}
+```  
+
+"mé a koi sa ser un fichier temporère ?"  
+Mon cher Kévin, comme on dit:  
+"Ce qui ne rentre par dans les *registres* rentre dans la RAM, ce qui ne rentre pas dans la RAM rentre dans le disque dur."  
+registre\*: Toute petite mémoire dans le CPU (Processeur) capable de supporter des valeurs  
+Bref, ça peut être utile d'avoir des fichiers temporaires pour éviter de tout mettre dans la RAM et laisser l'OS s'embêter avec le *swap* :(  
+swap\* ou "espace d'échange": Fichier ou partition du disque dur servant à étendre la RAM  
+Arrêtons avec ces petites définitions, passons à la suite !  
+
+#### Valeur de retour
+
+char\*, le même que celui où le nom de fichier temporaire à été écrit, pour s'emboîter dans les fonctions.  
+
+### tmpfile
+
+Vous trouvez ça trop long de générer un nom de fichier, l'ouvrir, le fermer puis le supprimer ?  
+Pas de soucis, utilisez tmpfile !  
+tmpfile va directement vous donner un FILE\* ouvert en mode wb+ (Écritue + Lecture | Mode Binaire)  
+(Si vous préfèrez un mode précis vous devriez utiliser la méthode ci-dessus)  
+
+```c
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  FILE* tmp = tmpfile();
+  if(!tmp)
+  {
+    puts("Erreur ouverture fichier temporaire");
+    return 1;
+  }
+  
+  fputs(tmp, "bonjour");
+  rewind(tmp);
+  char c;
+  while(c != EOF)
+  {
+    c = fgetc(tmp);
+    putchar(c);
+  }
+  fclose(tmp);
+  remove(tmp);
+  
+  return 0;
+}
+```  
+
+#### Valeur de retour: FILE* (NULL (donc 0, faux) si erreur)
+
+## coming soon
