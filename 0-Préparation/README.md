@@ -36,6 +36,11 @@ Je suis sous GNU/Linux mais je vais vous donner les étapes pour tous les systè
 Sous Micro$oft Windows, je vous recommande TCC (Même si MinGW est techniquement mieux).  
 Sa particularité est d'être très petit et de faire des programmes très petits !  
 Vous pouvez le télécharger pour [32 BITS](http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win32-bin.zip) ou [64-BITS](http://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip).  
+
+###### Modification: Utilisez MinGW en fait, ça sera plus pratique pour la suite
+
+[32-BITS](https://sourceforge.net/projects/mingw/) ou [64-BITS](http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe/download)  
+  
 Ensuite il faudra extraire le petit .zip à l'aide d'un clic droit, et puis l'ajouter au path...  
 Je vous laisse chercher sur internet, ça serait trop long à expliquer... (Désolé)  
   
